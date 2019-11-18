@@ -11,4 +11,5 @@ public interface CustomerDao {
 	public List<Customer> findAll() throws Exception;
 	public int updateById(Long id) throws Exception;
 	public int deleteById(Long id) throws Exception;
+	public Customer getCSMTRByMaxId() throws Exception;
 }

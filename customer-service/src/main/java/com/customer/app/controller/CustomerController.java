@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;	
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,15 @@ public class CustomerController {
 			return new ResponseEntity<List<Customer>>(customers,HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Customer>>(customers,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/customers",method=RequestMethod.POST)
+	public ResponseEntity<Customer> saveCustomer(@RequestBody Customer customer) throws Exception{
+		 customer = customerService.save(customer);
+		if(customer==null) {
+			return new ResponseEntity<Customer>(customer,HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Customer>(customer,HttpStatus.OK);
 	}
 
 }

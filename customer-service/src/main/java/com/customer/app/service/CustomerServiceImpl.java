@@ -13,8 +13,11 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerDao customerDao;
 	@Override
 	public Customer save(Customer customer) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		int count=customerDao.save(customer);
+		if(count>0) {
+			return customerDao.getCSMTRByMaxId();
+		}
+		return customer;
 	}
 
 	@Override

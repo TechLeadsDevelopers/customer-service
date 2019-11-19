@@ -62,4 +62,16 @@ public class CustomerController {
 		return new ResponseEntity<Customer>(customer, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/customers/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Customer> updateCustomerById(@PathVariable("id") Long id, @RequestBody Customer customer) {
+		try {
+			customer = customerService.updateById(id, customer);
+
+			return new ResponseEntity<Customer>(customer, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Customer>(new Customer(), HttpStatus.NOT_FOUND);
+	}
+
 }

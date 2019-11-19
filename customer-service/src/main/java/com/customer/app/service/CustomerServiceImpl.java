@@ -53,8 +53,8 @@ public class CustomerServiceImpl implements CustomerService {
 			if(count>0) {
 				return findById(id);
 			}
-			customer.setId(id);
-			return customer;
+			
+			return new Customer();
 		} catch (Exception e) {
 			throw e;
 		}

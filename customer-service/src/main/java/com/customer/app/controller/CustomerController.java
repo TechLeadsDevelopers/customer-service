@@ -1,5 +1,6 @@
 package com.customer.app.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +73,22 @@ public class CustomerController {
 			e.printStackTrace();
 		}
 		return new ResponseEntity<Customer>(new Customer(), HttpStatus.NOT_FOUND);
+	}
+
+	@RequestMapping(value = "/customers/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<List<Customer>> deleteById(@PathVariable("id") Long id) {
+		List<Customer> customers = null;
+		try {
+			customers = customerService.deleteById(id);
+
+			if (customers.size() == 0) {
+				return new ResponseEntity<List<Customer>>(customers, HttpStatus.NO_CONTENT);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<List<Customer>>(customers, HttpStatus.OK);
 	}
 
 }

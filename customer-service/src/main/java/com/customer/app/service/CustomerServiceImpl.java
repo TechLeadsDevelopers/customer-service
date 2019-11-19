@@ -1,5 +1,6 @@
 package com.customer.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,8 +63,11 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<Customer> deleteById(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		int count=customerDao.deleteById(id);
+		if(count>0) {
+			return findAll();
+		}
+		return new ArrayList<Customer>();
 	}
 
 }

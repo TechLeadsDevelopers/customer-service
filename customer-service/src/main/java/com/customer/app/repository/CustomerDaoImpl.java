@@ -123,8 +123,12 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public int deleteById(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			SqlParameterSource paramSource = new MapSqlParameterSource().addValue("id", id);
+			return namedParameterJdbcTemplate.update(DBQueries.DELTE_CUSTMR_BY_ID, paramSource);
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	@Override

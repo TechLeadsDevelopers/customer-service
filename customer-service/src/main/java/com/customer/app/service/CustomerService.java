@@ -9,7 +9,7 @@ public interface CustomerService {
 	public Customer findById(Long id) throws Exception;
 	public Customer findByName(String name) throws Exception;
 	public List<Customer> findAll() throws Exception;
-	public Customer updateById(Long id) throws Exception;
+	public Customer updateById(Long id,Customer customer) throws Exception;
 	public List<Customer> deleteById(Long id) throws Exception;
 
 }

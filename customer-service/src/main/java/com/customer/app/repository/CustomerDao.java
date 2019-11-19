@@ -9,7 +9,7 @@ public interface CustomerDao {
 	public Customer findById(Long id) throws Exception;
 	public Customer findByName(String name) throws Exception;
 	public List<Customer> findAll() throws Exception;
-	public int updateById(Long id) throws Exception;
+	public int updateById(Long id,Customer customer) throws Exception;
 	public int deleteById(Long id) throws Exception;
 	public Customer getCSMTRByMaxId() throws Exception;
 }

@@ -22,8 +22,12 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer findById(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Customer customer = customerDao.findById(id);
+			return customer;
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	@Override
@@ -43,9 +47,17 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer updateById(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Customer updateById(Long id,Customer customer) throws Exception {
+		try {
+			int count=customerDao.updateById(id, customer);
+			if(count>0) {
+				return findById(id);
+			}
+			customer.setId(id);
+			return customer;
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	@Override

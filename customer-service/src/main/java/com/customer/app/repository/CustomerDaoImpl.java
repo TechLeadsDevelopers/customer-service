@@ -41,8 +41,33 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public Customer findById(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Customer customer = new Customer();
+
+		SqlParameterSource paramSource = new MapSqlParameterSource().addValue("id", id);
+		try {
+			namedParameterJdbcTemplate.query(DBQueries.SELECT_CUSTMR_BY_ID, paramSource,
+					new ResultSetExtractor<Customer>() {
+
+						@Override
+						public Customer extractData(ResultSet rs) throws SQLException, DataAccessException {
+							while (rs.next()) {
+
+								customer.setId(rs.getLong("ID"));
+								customer.setName(rs.getString("NAME"));
+								customer.setDescription(rs.getString("DESCRIPTION"));
+								customer.setCreatedate(rs.getTimestamp("CREATEDATE"));
+								customer.setCreatedUser(rs.getString("CREATEDUSER"));
+								customer.setLastmodified(rs.getTimestamp("LASTMODIFIED"));
+								customer.setUpdatedUser(rs.getString("UPDATEDUSER"));
+							}
+							return customer;
+						}
+					});
+
+			return customer;
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	@Override
@@ -80,9 +105,20 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	public int updateById(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateById(Long id, Customer customer) throws Exception {
+
+		try {
+			SqlParameterSource paramSource = new MapSqlParameterSource()
+					.addValue("name", customer.getName())
+					.addValue("description", customer.getDescription())
+					.addValue("lastmodified", new Timestamp(new Date().getTime()))
+					.addValue("updateduser", customer.getUpdatedUser())
+					.addValue("id", id);
+			return namedParameterJdbcTemplate.update(DBQueries.UPDTE_CUSTMR_BY_ID, paramSource);
+		} catch (Exception e) {
+			throw e;
+		}
+
 	}
 
 	@Override

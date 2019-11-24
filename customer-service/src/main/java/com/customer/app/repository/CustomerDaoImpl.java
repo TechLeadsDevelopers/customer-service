@@ -21,7 +21,7 @@ import com.customer.app.model.Customer;
 @Repository
 public class CustomerDaoImpl implements CustomerDao {
 	@Autowired
-	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;;
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	@Override
 	public int save(Customer customer) throws Exception {
